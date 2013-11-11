@@ -4,6 +4,10 @@ class Site extends CI_Controller {
 
 	public function index(){
 		echo "Hi internet!";
+		$this->hello();
 	}
 
+	public function hello(){
+		 echo "Something else";
+	}
 }
