@@ -20,6 +20,29 @@ class Site extends CI_Controller {
 
 	function about() {
 		$data['title'] = "About!";
-		$this->load->view("view_about");
+		$this->load->view("view_about", $data);
+	}
+
+	function getValues(){
+		$this->load->model("get_db");
+
+		$data['results'] = $this->get_db->getAll();
+		
+		$this->load->view("view_db", $data);
+	}
+	function insertValues(){
+		$this->load->model("get_db");
+
+		$newRow = array(
+			array(
+				"name" => "sue"
+			),
+			array(
+				"name" => "dylan"
+			)
+		);
+
+		$this->get_db->insert2($newRow);
+		echo "it has been added";
 	}
 }
