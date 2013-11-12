@@ -45,4 +45,47 @@ class Site extends CI_Controller {
 		$this->get_db->insert2($newRow);
 		echo "it has been added";
 	}
+
+	function updateValues(){
+		$this->load->model("get_db");
+
+		$newRow = array (
+			array(
+				"id" => 1,
+				"name" => "sue"
+			),
+			array(
+				"id" => 3,
+				"name" => "dylan"
+			),
+			array(
+				"id" => 4,
+				"name" => "marcus"
+			)
+		);
+
+		$this->get_db->update2($newRow);
+
+		echo "it has been updated";
+	}
+
+	function deleteValues(){
+		$this->load->model("get_db");
+
+		$oldRow = array (
+			"id" => 4
+		);
+		$this->get_db->delete1($oldRow);
+
+		echo "deleted!";
+	}
+
+	function emptyValues(){
+		$this->load->model("get_db");
+
+		$oldRow = "test";
+		$this->get_db->empty1($oldRow);
+
+		echo "deleted everything!";
+	}
 }
