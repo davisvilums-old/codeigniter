@@ -3,11 +3,19 @@
 class Site extends CI_Controller {
 
 	public function index(){
-		echo "Hi internet!";
-		$this->hello();
+		echo "Hi internet! <br/>";
+		$this->home();
 	}
 
-	public function hello(){
-		 echo "Something else";
+	public function home(){
+		$data['title'] = "Welcome!";
+		$data['var1'] = "2";
+		$data['var2'] = "8";
+
+		$this->load->model("math");
+
+		$data['addTotal'] = $this->math->add($data['var1'],$data['var2']);
+		$data['subTotal'] = $this->math->sub($data['var1'],$data['var2']);
+		$this->load->view("view_home", $data);
 	}
 }
