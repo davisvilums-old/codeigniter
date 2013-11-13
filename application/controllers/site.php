@@ -26,4 +26,46 @@ class Site extends CI_Controller {
 		$this->load->view("site_footer");
 		
 	}
+
+	public function contact(){
+		$data["message"] = "";
+
+		$this->load->view("site_header");
+		$this->load->view("site_nav");
+		$this->load->view("content_contact", $data);
+		$this->load->view("site_footer");
+	}
+
+	public function send_email(){
+
+		$this->load->library("form_validation");
+
+		$this->form_validation->set_rules("fullName", "Full Name", "required|alpha|xss_clean");
+		$this->form_validation->set_rules("email", "Email Address", "required|valid_email|xss_clean");
+		$this->form_validation->set_rules("message", "Message", "required|xss_clean");
+
+		if ($this->form_validation->run() == FALSE){
+			$data["message"] = "FALSE";
+		} else {
+			$data["message"] = "The email has successefully been sent;";
+
+			$this->load->library("email");
+
+			$this->email->from(set_value("email"),set_value("fullName"));
+			$this->email->to("da@fmail.com");
+			$this->email->subject("Message from out form");
+			$this->email->message(set_value("message"));
+
+			$this->email->send();
+
+			//echo $this->email->print_debugger();
+
+		}
+
+		$this->load->view("site_header");
+		$this->load->view("site_nav");
+		$this->load->view("content_contact", $data);
+		$this->load->view("site_footer");
+
+	}
 }
